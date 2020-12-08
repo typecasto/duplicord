@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "duplicord"
+version = "0.1.0"
+description = "Duplicates a guild's messages to another guild."
+authors = ["Tabbs <larsona@outlook.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+"discord.py" = "^1.5.1"
+alive-progress = "^1.6.1"
+requests = "^2.25.0"
+
+[tool.poetry.dev-dependencies]
+black = "^20.8b1"
+pytest = "^6.1.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
