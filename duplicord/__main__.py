@@ -1,4 +1,4 @@
-from time import time
+import time
 from typing import Dict, List, Optional, Tuple
 import discord
 import os
@@ -6,7 +6,8 @@ import pprint as prettyprinter
 import re
 import json
 from alive_progress import alive_bar, config_handler
-config_handler.set_global(unknown = "dots_waves2")
+
+config_handler.set_global(unknown="dots_waves2")
 
 pp = prettyprinter.PrettyPrinter(indent=4)
 pprint = pp.pprint
@@ -72,9 +73,9 @@ print("Give it a minute to come online.")
 client = discord.Client()
 
 
-
 @client.event
 async def on_ready():
+    print()
     print("We're online.")
     print("If it stops sending messages, stay calm. It's getting ratelimited.")
     print("Give it 3 minutes at max, then kill it and raise an issue.")
@@ -96,6 +97,7 @@ async def on_ready():
                 "Please create a webhook and name it duplicord. Press enter to continue."
             )
     for filename, category, channel, hasfiles in channelsToImport:
+        print()
         input(f"Please change the webhook to {channel}. Press enter to continue.")
         with open("./exported/" + filename) as file:
             loaded = json.load(file)
@@ -115,24 +117,43 @@ async def on_ready():
         #     "reactions": [(1024, "middletonmoment"),(None, "🤡")]
         # }
         # TODO Change webhook to match channel
-        with alive_bar(
-            len(messages), title="Sending messages..."
-        ) as bar:
-            for message in messages:
+
+        # author id:
+        authors: Dict[int, str] = dict()
+        author_pfp_messages: List[discord.Message] = []
+        # Send authors pfps and then re-use their cdn URLs for the webhooks
+        with alive_bar(len(messages), title="Processing authors...") as bar:
+            for x in messages:
+                if int(x["author"]["id"]) not in authors:
+                    with open(
+                        "./exported/" + x["author"]["avatarUrl"].replace("\\", "/"),
+                        mode="rb",  # Open avatar url as a file
+                    ) as file:
+                        # discord.py wants their own file class ig
+                        discordfile = discord.File(file)
+                        pfpmessage: discord.Message = await webhook.send(file=discordfile)
+                    authors.update({int(x["author"]["id"]): pfpmessage["attachments"][0]["url"]})
+                    author_pfp_messages.append(pfpmessage)  # For possible deletion later
+                bar()  # can't forget to progress
+
+        # Actually send the messages
+        with alive_bar(len(messages), title="Sending messages...") as bar:
+            for i, message in enumerate(messages):
                 # Find any content in the messages
                 if message["type"] == "Default" and message["content"]:
                     sent: discord.Message = await webhook.send(
-                        content = message["content"],
-                        wait = True,
+                        content=message["content"],
+                        wait=True,
                         username=message["author"]["name"],
+                        avatar_url=authors[int(message["author"]["id"])],
                     )
                 else:
                     sent = None
                 if message["isPinned"] == True:
                     await sent.pin()
-                time.sleep(.5)
+                time.sleep(0.5)
                 bar()
-    print("We're done here. ctrl+c twice to exit.")
-                
+    print("We're done here. ctrl+c twice to exit, and ignore any further errors.")
+
 
 client.run(token)

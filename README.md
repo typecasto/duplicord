@@ -20,6 +20,8 @@ This is the bot for you!
 * Create channels
 * Detect multiple webhooks for different channels
 * Move the webhooks to different channels
+* Seperate messages with a different timestamp
+  * Do this with some unicode trickery, insert a 0-width space into author name to make it seperate from author above if timestamp different by ~20min
 * ~~Display a nifty progress bar~~ *Added in v0.2.0*
 * Allow you to resume from a certain point on failure
 * Allow you to filter out certain users (like bots)
@@ -64,6 +66,8 @@ to the required level. A message will be sent, however
 ## Changelog
 
 ```changelog
+v0.3.0
+    Avatars working
 v0.2.0
     Pin messages that were pinned
     Progress bar
