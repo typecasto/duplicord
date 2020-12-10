@@ -12,17 +12,18 @@ This is the bot for you!
 
 ### What does this bot do?
 
-* Copies a list of messages dumped using [this tool](https://github.com/Tyrrrz/DiscordChatExporter).
+* Copies a list of messages dumped using [this tool](https://github.com/Tyrrrz/DiscordChatExporter) to a target server using a bot.
 * It does this by creating webhooks with the sender's name and avatar, but unfortunately roles and nicknames aren't carried over.
 
 ### What might this bot do in the future? (A.K.A my TODO list)
 
-* Work lol
 * Create channels
-* Display a nifty progress bar
+* Detect multiple webhooks for different channels
+* Move the webhooks to different channels
+* ~~Display a nifty progress bar~~ *Added in v0.2.0*
 * Allow you to resume from a certain point on failure
 * Allow you to filter out certain users (like bots)
-* Pin messages that were pinned before
+* ~~Pin messages that were pinned before~~ *Added in v0.2.0*
 * Copy attachments
   * Split attachments >8MB into multiple files?
   * Download and reupload attachments live to save on disk space?
@@ -59,3 +60,13 @@ to the required level. A message will be sent, however
 just pull messages and keep the same files.
 * Check in the export folder to make sure that there's actually a folder for each channel with all the attachments in it. 
 * For public/large servers, maybe go one channel at a time. The memes chat alone on one of my servers was 1.13 GB and there's like 10 people total for <1 year.
+* Don't get concerned if it stops. Usually, the bot will be ratelimited once every 31 or so messages. Give it 3 minutes or so, if it's worse than that, raise an issue.
+
+## Changelog
+
+```changelog
+v0.2.0
+    Pin messages that were pinned
+    Progress bar
+v0.1.0
+    Basic functionality

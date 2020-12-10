@@ -132,6 +132,7 @@ async def on_ready():
                     await sent.pin()
                 time.sleep(.5)
                 bar()
+    print("We're done here. ctrl+c twice to exit.")
                 
 
 client.run(token)
