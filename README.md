@@ -57,10 +57,8 @@ to the required level. A message will be sent, however
 ### Helpful tips
 
 * Avoid copying any channels dedicated to bots, especially music bots. They don't really matter, and can contain TONS of youtube thumbnails.
-* You can update a dump by just dumping again to the same folder, and if "reuse downloaded media" is on in the dumper program's settings, it will 
-just pull messages and keep the same files.
+* You can update a dump by just dumping again to the same folder, and if "reuse downloaded media" is on in the dumper program's settings, it will just pull messages and keep the same files.
 * Check in the export folder to make sure that there's actually a folder for each channel with all the attachments in it. 
-* For public/large servers, maybe go one channel at a time. The memes chat alone on one of my servers was 1.13 GB and there's like 10 people total for <1 year.
 * Don't get concerned if it stops. Usually, the bot will be ratelimited once every 31 or so messages. Give it 3 minutes or so, if it's worse than that, raise an issue.
 
 ## Changelog
