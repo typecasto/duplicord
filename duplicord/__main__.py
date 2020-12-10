@@ -131,28 +131,36 @@ async def on_ready():
                     ) as file:
                         # discord.py wants their own file class ig
                         discordfile = discord.File(file)
-                        pfpmessage: discord.Message = await webhook.send(file=discordfile)
-                    authors.update({int(x["author"]["id"]): pfpmessage["attachments"][0]["url"]})
-                    author_pfp_messages.append(pfpmessage)  # For possible deletion later
+                        pfpmessage: discord.Message = await webhook.send(
+                            file=discordfile
+                        )
+                    authors.update(
+                        {int(x["author"]["id"]): pfpmessage["attachments"][0]["url"]}
+                    )
+                    author_pfp_messages.append(
+                        pfpmessage
+                    )  # For possible deletion later
                 bar()  # can't forget to progress
 
         # Actually send the messages
         with alive_bar(len(messages), title="Sending messages...") as bar:
             for i, message in enumerate(messages):
                 # Find any content in the messages
-                if message["type"] == "Default" and (message["content"] or message["attachments"]):
+                if message["type"] == "Default" and (
+                    message["content"] or message["attachments"]
+                ):
                     attachments: List[discord.File] = []
                     for x in message["attachments"]:
-                        path = "./exported/" + x["url"].replace("\\","/")
+                        path = "./exported/" + x["url"].replace("\\", "/")
                         py_file = open(path, mode="rb")
                         attachments.append(discord.File(fp=py_file))
-                    #If attachments is empty, make it none
+                    # If attachments is empty, make it none
                     sent: discord.Message = await webhook.send(
-                        content=message["content"] if message["content"] else None,
+                        content=message["content"] or None,
                         wait=True,
                         username=message["author"]["name"],
                         avatar_url=authors[int(message["author"]["id"])],
-                        files=attachments if attachments else None
+                        files=attachments or None,
                     )
                 else:
                     sent = None
