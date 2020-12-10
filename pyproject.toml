@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "duplicord"
-version = "0.3.0"
+version = "0.4.0"
 description = "Duplicates a guild's messages to another guild."
 authors = ["Tabbs <larsona@outlook.com>"]
 

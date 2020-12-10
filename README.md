@@ -26,7 +26,7 @@ This is the bot for you!
 * Allow you to resume from a certain point on failure
 * Allow you to filter out certain users (like bots)
 * ~~Pin messages that were pinned before~~ *Added in v0.2.0*
-* Copy attachments
+* ~~Copy attachments~~ *Added in v0.4.0*
   * Split attachments >8MB into multiple files?
   * Download and reupload attachments live to save on disk space?
 * Copy reactions
@@ -66,6 +66,8 @@ to the required level. A message will be sent, however
 ## Changelog
 
 ```changelog
+v0.4.0
+    Attachments
 v0.3.0
     Avatars working
 v0.2.0

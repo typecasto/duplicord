@@ -140,12 +140,19 @@ async def on_ready():
         with alive_bar(len(messages), title="Sending messages...") as bar:
             for i, message in enumerate(messages):
                 # Find any content in the messages
-                if message["type"] == "Default" and message["content"]:
+                if message["type"] == "Default" and (message["content"] or message["attachments"]):
+                    attachments: List[discord.File] = []
+                    for x in message["attachments"]:
+                        path = "./exported/" + x["url"].replace("\\","/")
+                        py_file = open(path, mode="rb")
+                        attachments.append(discord.File(fp=py_file))
+                    #If attachments is empty, make it none
                     sent: discord.Message = await webhook.send(
-                        content=message["content"],
+                        content=message["content"] if message["content"] else None,
                         wait=True,
                         username=message["author"]["name"],
                         avatar_url=authors[int(message["author"]["id"])],
+                        files=attachments if attachments else None
                     )
                 else:
                     sent = None
