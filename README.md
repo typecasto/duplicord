@@ -43,15 +43,16 @@ to the required level. A message will be sent, however
 ## Usage instructions
 
 1. Download and install python (>=3.8)
-2. Download [this](https://github.com/Tyrrrz/DiscordChatExporter)
-3. Export any channels you want to get copied (use ctrl to select multiple). 
+2. `pip install poetry`
+3. `git clone http://thecakeisalie25/duplicord.py; cd duplicator`
+4. `poetry install --no-dev; poetry shell`
+5. Download [this](https://github.com/Tyrrrz/DiscordChatExporter)
+6. Export any channels you want to get copied (use ctrl to select multiple). 
     * Make sure the format is set to JSON, and under the 3 lines menu also make sure that "Download media" is turned on.
-4. `pip install poetry`
-5. `git clone http://thecakeisalie25/duplicord.py; cd duplicator`
-6. `poetry install --no-dev; poetry shell`
 7. Copy your folder of exported messages into the (outer) duplicator folder, and rename it to "exported".
-8. `python -m duplicord`
-9. Follow the prompts.
+8. Create a bot [here](https://discord.com/developers/applications) and copy it's token.
+9. `python -m duplicord`
+10. Follow the prompts.
 
 ### Helpful tips
 
