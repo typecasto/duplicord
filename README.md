@@ -2,7 +2,7 @@
 
 A bot (that creates webhooks) dedicated to copying messages from one server to another.
 
-**Warning: This bot is in early alpha. It will not function. If you do get it to function, create an issue telling me to update the readme.**
+**Warning: This bot is in beta. It likely will not function in any conditions less than ideal. Don't be afraid to create an issue.**
 
 Is your server getting served a DMCA takedown?  
 Does your friend abuse their role as owner to get what they want?  
