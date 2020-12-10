@@ -1,3 +1,4 @@
+from time import time
 from typing import Dict, List, Optional, Tuple
 import discord
 import os
@@ -129,6 +130,7 @@ async def on_ready():
                     sent = None
                 if message["isPinned"] == True:
                     await sent.pin()
+                time.sleep(.5)
                 bar()
                 
 
