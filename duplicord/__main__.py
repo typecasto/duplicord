@@ -155,16 +155,19 @@ async def on_ready():
                         py_file = open(path, mode="rb")
                         attachments.append(discord.File(fp=py_file))
                     # If attachments is empty, make it none
-                    sent: discord.Message = await webhook.send(
-                        content=message["content"] or None,
-                        wait=True,
-                        username=message["author"]["name"],
-                        avatar_url=authors[int(message["author"]["id"])],
-                        files=attachments or None,
-                    )
+                    try:
+                        sent: discord.Message = await webhook.send(
+                            content=message["content"] or None,
+                            wait=True,
+                            username=message["author"]["name"],
+                            avatar_url=authors[int(message["author"]["id"])],
+                            files=attachments or None,
+                        )
+                    except:
+                        sent = None
                 else:
                     sent = None
-                if message["isPinned"] == True:
+                if message["isPinned"] == True and sent:
                     await sent.pin()
                 time.sleep(0.5)
                 bar()
