@@ -2,9 +2,7 @@
 
 A bot (that creates webhooks) dedicated to copying messages from one server to another.
 
-**Warning: This bot is in beta. It likely will not function in any conditions less than ideal. Don't be afraid to create an issue.**
-
-Is your server getting served a DMCA takedown?  
+Is your server getting deleted, for some reason or another?  
 Does your friend abuse their role as owner to get what they want?  
 Third thing?
 
@@ -13,7 +11,10 @@ This is the bot for you!
 ### What does this bot do?
 
 * Copies a list of messages dumped using [this tool](https://github.com/Tyrrrz/DiscordChatExporter) to a target server using a bot.
-* It does this by creating webhooks with the sender's name and avatar, but unfortunately roles and nicknames aren't carried over.
+* It does this by creating webhooks with the sender's name and avatar, and sending the original message through the webhook.
+* Displays a nifty progress bar, using the alive-progress library.
+* Pins messages that were pinned before.
+* Copies attachments, like images, videos, and files.
 
 ### What might this bot do in the future? (A.K.A my TODO list)
 
@@ -30,6 +31,7 @@ This is the bot for you!
   * Split attachments >8MB into multiple files?
   * Download and reupload attachments live to save on disk space?
 * Copy reactions
+* Be dockerized, for easier running.
 
 ### What won't this bot do?
 
@@ -40,21 +42,22 @@ messages, edited messages, etc.
 to exist anymore. 
 * Bypass nitro restrictions. If the original server has attachments over 8MB, they will not be copied unless you boost the target server 
 to the required level. A message will be sent, however
-* Go fast. The ratelimits for webhooks aren't the nicest. There might be something a good dev could do about it, but that's not me.
+* Go fast. The ratelimits for webhooks aren't the nicest. 
 
 ## Usage instructions
 
 1. Download and install python (>=3.8)
 2. `pip install poetry`
-3. `git clone http://thecakeisalie25/duplicord.py; cd duplicator`
-4. `poetry install --no-dev; poetry shell`
-5. Download [this](https://github.com/Tyrrrz/DiscordChatExporter)
-6. Export any channels you want to get copied (use ctrl to select multiple). 
+3. `git clone http://thecakeisalie25/duplicord.py; cd duplicord`
+5. `poetry install --no-dev; poetry shell`
+6. (If you want to use duplicord again in the future, come back to this directory and run `poetry shell` again, then start from here.)
+7. Download [this](https://github.com/Tyrrrz/DiscordChatExporter)
+8. Export any channels you want to get copied (use ctrl to select multiple). 
     * Make sure the format is set to JSON, and under the 3 lines menu also make sure that "Download media" is turned on.
-7. Copy your folder of exported messages into the (outer) duplicator folder, and rename it to "exported".
-8. Create a bot [here](https://discord.com/developers/applications) and copy it's token.
-9. `python -m duplicord`
-10. Follow the prompts.
+9. Copy your folder of exported messages into the (outer) duplicator folder, and rename it to "exported".
+10. Create a bot [here](https://discord.com/developers/applications) and copy it's token.
+11. `python -m duplicord`
+12. Follow the prompts.
 
 ### Helpful tips
 
